@@ -14,11 +14,11 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
     on<VerifyUser>(_onVerifyUser);
   }
 
-  final VerificationServices _verificationServices = VerificationServices();
+  final UserServices _verificationServices = UserServices();
 
   FutureOr<void> _onGetUnverifiedUser(
       GetUnverifiedUser event, Emitter<VerificationState> emit) async {
-    final response = await _verificationServices.getUnverifiedUser();
+    final response = await _verificationServices.getUsers();
     response.fold(
       (users) => emit(VerificationLoaded(users)),
       (error) => emit(VerificationError(error)),

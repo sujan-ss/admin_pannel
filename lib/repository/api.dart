@@ -8,4 +8,8 @@ class ApiConstants {
   static const String verifyUserUrl = "${baseUrl}user/verifyUser";
   static const String getAttachedFilesUrl =
       "${baseUrl}attach_files/getAttachFiles";
+  static const String getVerifiedUserUrl = "${baseUrl}user/getAllVerifiedUsers";
+  static const String deleteUser = "${baseUrl}user/deleteUser";
+  static const getIncidentsUrl = "${baseUrl}incident/getIncidents";
+  static const deleteIncidentsUrl = "${baseUrl}incident/deleteIncident";
 }

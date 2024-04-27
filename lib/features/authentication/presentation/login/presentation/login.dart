@@ -1,4 +1,5 @@
 import 'package:admin_panel/features/authentication/presentation/login/bloc/login_bloc.dart';
+import 'package:admin_panel/features/navigation/presentation/side_nav.dart';
 import 'package:admin_panel/features/verification/presentation/verification.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +70,7 @@ class _LoginState extends State<Login> {
             } else if (state is LoginSuccess) {
               Navigator.pushReplacement(context, MaterialPageRoute(
                 builder: (context) {
-                  return const VerificationPage();
+                  return const SideNavScreen();
                 },
               ));
             }

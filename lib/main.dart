@@ -1,5 +1,6 @@
 import 'package:admin_panel/features/authentication/presentation/login/presentation/login.dart';
 import 'package:admin_panel/features/sub-admin/get_status_page/presentation/get_Status_page.dart';
+import 'package:admin_panel/utils/splash_router.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
             ),
           )),
       // home: const Login(),
-      home: const Login(),
+      home: const SplashRouter(),
     );
   }
 }

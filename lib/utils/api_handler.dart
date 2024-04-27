@@ -2,7 +2,7 @@ import 'package:admin_panel/repository/api.dart';
 import 'package:admin_panel/repository/access_token_repo.dart';
 import 'package:dio/dio.dart';
 
-enum ApiMethod { get, post, put }
+enum ApiMethod { get, post, put, delete }
 
 bool isAlertDialougeOpen = false;
 
@@ -51,6 +51,13 @@ class ApiHandler {
         return response;
       } else if (method == ApiMethod.put) {
         response = await dio.put(url,
+            data: body,
+            options: Options(
+              headers: headers,
+            ));
+        return response;
+      } else if (method == ApiMethod.delete) {
+        response = await dio.delete(url,
             data: body,
             options: Options(
               headers: headers,
