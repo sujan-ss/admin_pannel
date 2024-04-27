@@ -129,7 +129,7 @@ class UserScreen extends StatelessWidget {
                                                 );
                                               },
                                               child:
-                                                  const Text("Show password"),
+                                                  const Text("Show passport"),
                                             ),
                                             const SizedBox(width: 20),
                                             ElevatedButton(

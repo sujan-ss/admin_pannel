@@ -114,14 +114,14 @@ class VerificationPage extends StatelessWidget {
                                                                   .size
                                                                   .width *
                                                               0.5,
-                                                      child: Image.network(
-                                                          user.imageUrl),
+                                                      child: Image.network(user
+                                                          .passportImageUrl),
                                                     ),
                                                   );
                                                 },
                                               );
                                             },
-                                            child: const Text("Show passwrod")),
+                                            child: const Text("Show passport")),
                                         const SizedBox(width: 20),
                                         ElevatedButton(
                                             onPressed: () {
