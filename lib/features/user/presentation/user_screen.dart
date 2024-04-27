@@ -121,8 +121,8 @@ class UserScreen extends StatelessWidget {
                                                                 .size
                                                                 .width *
                                                             0.5,
-                                                        child: Image.network(
-                                                            user.imageUrl),
+                                                        child: Image.network(user
+                                                            .passportImageUrl),
                                                       ),
                                                     );
                                                   },
