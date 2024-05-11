@@ -20,11 +20,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(LoginLoading());
     final response = await AuthRepository()
         .login(email: event.email, password: event.password);
-    print("hello world");
 
     response.fold((l) {
-      AccessTokenRepo().saveAccessToken(l);
-      emit(LoginSuccess());
+      AccessTokenRepo().saveAccessToken(l.accessToken, l.type);
+      emit(LoginSuccess(type: l.type));
     }, (r) {
       emit(LoginFailure(message: r));
     });

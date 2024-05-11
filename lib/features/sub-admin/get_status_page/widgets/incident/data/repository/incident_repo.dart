@@ -10,6 +10,7 @@ class IncidentRepo {
       final response = await apiHandler.callApi(
           ApiMethod.get, null, ApiConstants.getIncidentsUrl,
           isHeader: true);
+      print(response.data);
 
       List<IncidentModel> attachFiles = (response.data['incidents'] as List)
           .map((e) => IncidentModel.fromJson(e))
@@ -32,6 +33,26 @@ class IncidentRepo {
 
       await apiHandler.callApi(
           ApiMethod.delete, data, ApiConstants.deleteIncidentsUrl,
+          isHeader: true);
+      return left(true);
+    } catch (e) {
+      print(e);
+      return right("Something went wrong");
+    }
+  }
+
+  Future<Either<bool, String>> changeIncidentStatus(
+    String incidentId,
+    String status,
+  ) async {
+    try {
+      final data = {
+        "incidentId": incidentId,
+        "status": status,
+      };
+
+      await apiHandler.callApi(
+          ApiMethod.put, data, ApiConstants.changeIncidentStatus,
           isHeader: true);
       return left(true);
     } catch (e) {

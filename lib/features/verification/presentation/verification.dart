@@ -136,15 +136,6 @@ class VerificationPage extends StatelessWidget {
                                   },
                                 ),
                         ),
-                        ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const GetStatusPage()));
-                            },
-                            child: const Text("Sub Admin")),
                       ],
                     ),
                   ),

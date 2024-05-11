@@ -1,8 +1,12 @@
+import 'package:admin_panel/features/dialog/audio_player_dialog.dart';
+import 'package:admin_panel/features/dialog/video_player_dialog.dart';
 import 'package:admin_panel/features/sub-admin/get_status_page/bloc/attachfiles_bloc.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:html' as html;
 
 class AttachFiles extends StatelessWidget {
   const AttachFiles({super.key});
@@ -80,38 +84,27 @@ class AttachFiles extends StatelessWidget {
                                       const SizedBox(width: 10),
                                       ElevatedButton.icon(
                                           onPressed: () {
-                                            showDialog(
-                                                context: context,
-                                                builder: (context) {
-                                                  return Dialog(
-                                                    child: Container(
-                                                      height: 600,
-                                                      width: 600,
-                                                      child: Image.network(state
-                                                          .attachFiles[index]
-                                                          .videoUrl),
-                                                    ),
-                                                  );
-                                                });
+                                            CustomVideoPlayer
+                                                .showVideoPlayerDialog(
+                                                    context,
+                                                    state.attachFiles[index]
+                                                        .videoUrl);
                                           },
                                           icon: const Icon(Icons.movie),
                                           label: const Text("View Video")),
                                       const SizedBox(width: 10),
                                       ElevatedButton.icon(
                                           onPressed: () {
-                                            showDialog(
-                                                context: context,
-                                                builder: (context) {
-                                                  return Dialog(
-                                                    child: Container(
-                                                      height: 600,
-                                                      width: 600,
-                                                      child: Image.network(state
-                                                          .attachFiles[index]
-                                                          .audioUrl),
-                                                    ),
-                                                  );
-                                                });
+                                            final audioUrl = state
+                                                .attachFiles[index].audioUrl;
+                                            html.window.open(
+                                                "http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/ateapill.ogg",
+                                                '_blank');
+                                            // AudioPlayerDialog().showAudioPlayer(
+                                            //     context: context,
+                                            //     audioUrl: state
+                                            //         .attachFiles[index]
+                                            //         .audioUrl);
                                           },
                                           icon: const Icon(Icons.audiotrack),
                                           label: const Text("View Audio")),

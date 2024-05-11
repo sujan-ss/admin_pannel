@@ -13,10 +13,11 @@ class LoginLoading extends LoginState {
 }
 
 class LoginSuccess extends LoginState {
+  final String type;
   @override
   List<Object?> get props => throw UnimplementedError();
 
-  LoginSuccess();
+  LoginSuccess({required this.type});
 }
 
 class LoginFailure extends LoginState {

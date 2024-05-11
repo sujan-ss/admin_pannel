@@ -7,6 +7,7 @@ class IncidentModel {
   String description;
   String locationName;
   UserModel userModel;
+  String status;
 
   IncidentModel({
     required this.id,
@@ -15,7 +16,30 @@ class IncidentModel {
     required this.description,
     required this.locationName,
     required this.userModel,
+    this.status = "pending",
   });
+
+  //generate copyWith method
+
+  IncidentModel copyWith({
+    String? id,
+    String? lat,
+    String? long,
+    String? description,
+    String? locationName,
+    UserModel? userModel,
+    String? status,
+  }) {
+    return IncidentModel(
+      id: id ?? this.id,
+      lat: lat ?? this.lat,
+      long: long ?? this.long,
+      description: description ?? this.description,
+      locationName: locationName ?? this.locationName,
+      userModel: userModel ?? this.userModel,
+      status: status ?? this.status,
+    );
+  }
 
   factory IncidentModel.fromJson(Map<String, dynamic> json) {
     return IncidentModel(
@@ -25,6 +49,7 @@ class IncidentModel {
       description: json['description'],
       locationName: json['locationName'],
       userModel: UserModel.fromJson(json['user']),
+      status: json['status'],
     );
   }
 }

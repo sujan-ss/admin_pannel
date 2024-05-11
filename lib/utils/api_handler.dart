@@ -9,8 +9,9 @@ bool isAlertDialougeOpen = false;
 final apiHandler = ApiHandler();
 
 class ApiHandler {
+  String baseUrls = "";
   final dio = Dio(BaseOptions(
-    baseUrl: ApiConstants.baseUrl,
+    baseUrl: "",
     receiveTimeout: const Duration(seconds: 100),
     connectTimeout: const Duration(seconds: 100),
     sendTimeout: const Duration(seconds: 100),

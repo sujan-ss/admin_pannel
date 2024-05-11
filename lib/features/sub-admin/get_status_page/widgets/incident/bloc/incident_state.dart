@@ -28,3 +28,5 @@ final class IncidentFetchSuccess extends IncidentState {
   @override
   List<Object> get props => [incidents];
 }
+
+final class UpdateStatusSucess extends IncidentState {}

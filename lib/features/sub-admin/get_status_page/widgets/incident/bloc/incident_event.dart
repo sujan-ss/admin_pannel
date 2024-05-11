@@ -19,3 +19,13 @@ final class DeleteIncident extends IncidentEvent {
   @override
   List<Object> get props => [incidentId];
 }
+
+final class ChangeIncidentStatus extends IncidentEvent {
+  final String incidentId;
+  final String status;
+
+  const ChangeIncidentStatus(this.incidentId, this.status);
+
+  @override
+  List<Object> get props => [incidentId, status];
+}

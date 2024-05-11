@@ -1,6 +1,8 @@
+import 'package:admin_panel/features/authentication/presentation/login/presentation/login.dart';
 import 'package:admin_panel/features/navigation/bloc/navigation_bloc.dart';
 import 'package:admin_panel/features/user/presentation/user_screen.dart';
 import 'package:admin_panel/features/verification/presentation/verification.dart';
+import 'package:admin_panel/repository/access_token_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -52,6 +54,20 @@ class SideNavScreen extends StatelessWidget {
                                       isSelected: selectedIndex == index,
                                     ),
                                   )),
+                          const Spacer(),
+                          ElevatedButton.icon(
+                              onPressed: () {
+                                AccessTokenRepo().removeAccessToken();
+                                Navigator.of(context)
+                                    .pushReplacement(MaterialPageRoute(
+                                  builder: (context) {
+                                    return const Login();
+                                  },
+                                ));
+                              },
+                              icon: const Icon(Icons.logout),
+                              label: const Text("Logout")),
+                          const SizedBox(height: 20),
 
                           ///will add logo here
                         ],

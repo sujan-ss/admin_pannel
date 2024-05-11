@@ -1,6 +1,5 @@
 class ApiConstants {
   static const String baseUrl = "http://192.168.1.66:3000/";
-
   static const String login = "${baseUrl}admin/login";
   static const String uploadImage = "${baseUrl}image/uploadImage";
   static const String getUser = "${baseUrl}user/getUserProfile";
@@ -12,4 +11,5 @@ class ApiConstants {
   static const String deleteUser = "${baseUrl}user/deleteUser";
   static const getIncidentsUrl = "${baseUrl}incident/getIncidents";
   static const deleteIncidentsUrl = "${baseUrl}incident/deleteIncident";
+  static const changeIncidentStatus = "${baseUrl}incident/changeStatus";
 }

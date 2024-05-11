@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 class AuthRepository {
-  Future<Either<String, String>> login({
+  Future<Either<SucessResponse, String>> login({
     required String email,
     required String password,
   }) async {
@@ -11,8 +11,11 @@ class AuthRepository {
       final data = {"email": email, "password": password};
       final response = await Dio().post(ApiConstants.login, data: data);
       final accessToken = response.data['accessToken'];
+      final type = response.data["role"];
+      SucessResponse sucessResponse =
+          SucessResponse(accessToken: accessToken, type: type);
 
-      return left(accessToken);
+      return left(sucessResponse);
     } on DioException catch (e) {
       if (e.response?.statusCode == 401) {
         return right("Invalid email or password");
@@ -22,4 +25,10 @@ class AuthRepository {
       return right("Something went wrong");
     }
   }
+}
+
+class SucessResponse {
+  final String accessToken;
+  final String type;
+  SucessResponse({required this.accessToken, required this.type});
 }

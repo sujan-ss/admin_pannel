@@ -12,6 +12,7 @@ class IncidentBloc extends Bloc<IncidentEvent, IncidentState> {
   IncidentBloc() : super(IncidentInitial()) {
     on<IncidentEvent>(incidentEvent);
     on<DeleteIncident>(deleteIncident);
+    on<ChangeIncidentStatus>(changeIncidentStatus);
   }
 
   FutureOr<void> incidentEvent(
@@ -33,6 +34,24 @@ class IncidentBloc extends Bloc<IncidentEvent, IncidentState> {
               .incidents
               .where((element) => element.id != event.incidentId)
               .toList()));
+    }, (r) {
+      emit(IncidentFetchFailure(message: r));
+    });
+  }
+
+  FutureOr<void> changeIncidentStatus(
+      ChangeIncidentStatus event, Emitter<IncidentState> emit) async {
+    final response = await IncidentRepo()
+        .changeIncidentStatus(event.incidentId, event.status);
+    response.fold((l) {
+      emit(IncidentFetchSuccess(
+          incidents: (state as IncidentFetchSuccess)
+              .incidents
+              .map((e) => e.id == event.incidentId
+                  ? e.copyWith(status: event.status)
+                  : e)
+              .toList()));
+      emit(UpdateStatusSucess());
     }, (r) {
       emit(IncidentFetchFailure(message: r));
     });
