@@ -29,3 +29,17 @@ final class ChangeIncidentStatus extends IncidentEvent {
   @override
   List<Object> get props => [incidentId, status];
 }
+
+final class GetPoliceEvent extends IncidentEvent {
+  const GetPoliceEvent();
+}
+
+final class UpdatePolice extends IncidentEvent {
+  final String police;
+  final String incidentId;
+
+  const UpdatePolice(this.police, this.incidentId);
+
+  @override
+  List<Object> get props => [police, incidentId];
+}

@@ -1,3 +1,4 @@
+import 'package:admin_panel/features/add_police/add_police.dart';
 import 'package:admin_panel/features/authentication/presentation/login/presentation/login.dart';
 import 'package:admin_panel/features/navigation/bloc/navigation_bloc.dart';
 import 'package:admin_panel/features/user/presentation/user_screen.dart';
@@ -14,11 +15,13 @@ class SideNavScreen extends StatelessWidget {
     List<String> sideNavs = [
       "Verification",
       "Users",
+      "Add Police",
     ];
 
     List<Widget> pages = [
       const VerificationPage(),
       const UserScreen(),
+      const AddPoliceScreen(),
     ];
     return BlocProvider(
       create: (context) => NavigationBloc(),

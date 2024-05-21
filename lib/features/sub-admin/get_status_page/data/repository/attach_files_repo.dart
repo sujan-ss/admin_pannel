@@ -22,4 +22,40 @@ class AttachFilesRepo {
       return right("Something went wrong");
     }
   }
+
+  Future<Either<String, String>> deleteAttachFiles(String id) async {
+    try {
+      await apiHandler.callApi(
+          ApiMethod.delete,
+          {
+            "id": id,
+          },
+          ApiConstants.deleteAttachFileUrl,
+          isHeader: true);
+
+      return left("Deleted Successfully");
+    } catch (e) {
+      debugPrint(e.toString());
+      return right("Something went wrong");
+    }
+  }
+
+  Future<Either<String, String>> changeAttachFileStatus(
+      String id, String status) async {
+    try {
+      await apiHandler.callApi(
+          ApiMethod.put,
+          {
+            "id": id,
+            "status": status,
+          },
+          ApiConstants.changeAttachFileStatusUrl,
+          isHeader: true);
+
+      return left("Status Changed Successfully");
+    } catch (e) {
+      debugPrint(e.toString());
+      return right("Something went wrong");
+    }
+  }
 }

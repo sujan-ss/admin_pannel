@@ -30,3 +30,23 @@ final class IncidentFetchSuccess extends IncidentState {
 }
 
 final class UpdateStatusSucess extends IncidentState {}
+
+final class PoliceFetchInProgress extends IncidentState {}
+
+final class PoliceFetchFailure extends IncidentState {
+  final String message;
+
+  const PoliceFetchFailure({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
+final class PoliceFetchSuccess extends IncidentState {
+  final List<String> police;
+
+  const PoliceFetchSuccess({required this.police});
+
+  @override
+  List<Object> get props => [police];
+}

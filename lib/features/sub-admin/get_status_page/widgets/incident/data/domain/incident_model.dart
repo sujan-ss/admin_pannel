@@ -8,6 +8,7 @@ class IncidentModel {
   String locationName;
   UserModel userModel;
   String status;
+  String police;
 
   IncidentModel({
     required this.id,
@@ -17,6 +18,7 @@ class IncidentModel {
     required this.locationName,
     required this.userModel,
     this.status = "pending",
+    required this.police,
   });
 
   //generate copyWith method
@@ -31,14 +33,14 @@ class IncidentModel {
     String? status,
   }) {
     return IncidentModel(
-      id: id ?? this.id,
-      lat: lat ?? this.lat,
-      long: long ?? this.long,
-      description: description ?? this.description,
-      locationName: locationName ?? this.locationName,
-      userModel: userModel ?? this.userModel,
-      status: status ?? this.status,
-    );
+        id: id ?? this.id,
+        lat: lat ?? this.lat,
+        long: long ?? this.long,
+        description: description ?? this.description,
+        locationName: locationName ?? this.locationName,
+        userModel: userModel ?? this.userModel,
+        status: status ?? this.status,
+        police: police);
   }
 
   factory IncidentModel.fromJson(Map<String, dynamic> json) {
@@ -50,6 +52,7 @@ class IncidentModel {
       locationName: json['locationName'],
       userModel: UserModel.fromJson(json['user']),
       status: json['status'],
+      police: json['police'] ?? "none",
     );
   }
 }

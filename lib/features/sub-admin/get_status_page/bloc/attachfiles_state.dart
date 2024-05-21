@@ -28,3 +28,5 @@ final class AttachfilesLoaded extends AttachfilesState {
   @override
   List<Object> get props => [attachFiles];
 }
+
+final class AttachFileStatusUpdateSucess extends AttachfilesState {}

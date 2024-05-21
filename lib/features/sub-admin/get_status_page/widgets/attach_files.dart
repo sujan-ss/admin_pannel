@@ -10,9 +10,11 @@ import 'dart:html' as html;
 
 class AttachFiles extends StatelessWidget {
   const AttachFiles({super.key});
-
   @override
   Widget build(BuildContext context) {
+    final status = ["pending", "approved", "rejected"];
+    late String curremtStatus;
+
     return BlocProvider(
       create: (context) => AttachfilesBloc()..add(GetAttachedFile()),
       child: BlocConsumer<AttachfilesBloc, AttachfilesState>(
@@ -41,91 +43,127 @@ class AttachFiles extends StatelessWidget {
                             const SizedBox(height: 10),
                         itemCount: state.attachFiles.length,
                         itemBuilder: (context, index) {
-                          return Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 16),
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 5,
-                                      blurRadius: 7,
-                                      offset: const Offset(0, 3),
+                          String currentStatus =
+                              state.attachFiles[index].status;
+                          return StatefulBuilder(builder: (context, setState) {
+                            return Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 16),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 5,
+                                        blurRadius: 7,
+                                        offset: const Offset(0, 3),
+                                      ),
+                                    ]),
+                                child: Column(
+                                  children: [
+                                    titlerow(
+                                        title: "Description",
+                                        value: state
+                                            .attachFiles[index].description),
+                                    const SizedBox(height: 10),
+                                    Row(
+                                      children: [
+                                        ElevatedButton.icon(
+                                            onPressed: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return Dialog(
+                                                      child: SizedBox(
+                                                        height: 600,
+                                                        width: 600,
+                                                        child: Image.network(
+                                                            state
+                                                                .attachFiles[
+                                                                    index]
+                                                                .photoUrl),
+                                                      ),
+                                                    );
+                                                  });
+                                            },
+                                            icon: const Icon(Icons.photo),
+                                            label: const Text("View Photo")),
+                                        const SizedBox(width: 10),
+                                        ElevatedButton.icon(
+                                            onPressed: () {
+                                              CustomVideoPlayer
+                                                  .showVideoPlayerDialog(
+                                                      context,
+                                                      state.attachFiles[index]
+                                                          .videoUrl);
+                                            },
+                                            icon: const Icon(Icons.movie),
+                                            label: const Text("View Video")),
+                                        const SizedBox(width: 10),
+                                        ElevatedButton.icon(
+                                            onPressed: () {
+                                              final audioUrl = state
+                                                  .attachFiles[index].audioUrl;
+                                              html.window.open(
+                                                  "http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/ateapill.ogg",
+                                                  '_blank');
+                                              // AudioPlayerDialog().showAudioPlayer(
+                                              //     context: context,
+                                              //     audioUrl: state
+                                              //         .attachFiles[index]
+                                              //         .audioUrl);
+                                            },
+                                            icon: const Icon(Icons.audiotrack),
+                                            label: const Text("View Audio")),
+                                      ],
                                     ),
-                                  ]),
-                              child: Column(
-                                children: [
-                                  titlerow(
-                                      title: "Description",
-                                      value:
-                                          state.attachFiles[index].description),
-                                  const SizedBox(height: 10),
-                                  Row(
-                                    children: [
-                                      ElevatedButton.icon(
-                                          onPressed: () {
-                                            showDialog(
-                                                context: context,
-                                                builder: (context) {
-                                                  return Dialog(
-                                                    child: Container(
-                                                      height: 600,
-                                                      width: 600,
-                                                      child: Image.network(state
-                                                          .attachFiles[index]
-                                                          .photoUrl),
-                                                    ),
-                                                  );
-                                                });
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      children: [
+                                        const Text("Status: "),
+                                        DropdownButton(
+                                          value: currentStatus,
+                                          items: status
+                                              .map((e) => DropdownMenuItem(
+                                                    value: e,
+                                                    child: Text(e),
+                                                  ))
+                                              .toList(),
+                                          onChanged: (value) {
+                                            currentStatus = value.toString();
+                                            setState(() {});
                                           },
-                                          icon: const Icon(Icons.photo),
-                                          label: const Text("View Photo")),
-                                      const SizedBox(width: 10),
-                                      ElevatedButton.icon(
-                                          onPressed: () {
-                                            CustomVideoPlayer
-                                                .showVideoPlayerDialog(
-                                                    context,
-                                                    state.attachFiles[index]
-                                                        .videoUrl);
-                                          },
-                                          icon: const Icon(Icons.movie),
-                                          label: const Text("View Video")),
-                                      const SizedBox(width: 10),
-                                      ElevatedButton.icon(
-                                          onPressed: () {
-                                            final audioUrl = state
-                                                .attachFiles[index].audioUrl;
-                                            html.window.open(
-                                                "http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/ateapill.ogg",
-                                                '_blank');
-                                            // AudioPlayerDialog().showAudioPlayer(
-                                            //     context: context,
-                                            //     audioUrl: state
-                                            //         .attachFiles[index]
-                                            //         .audioUrl);
-                                          },
-                                          icon: const Icon(Icons.audiotrack),
-                                          label: const Text("View Audio")),
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Row(
-                                    children: [
-                                      ElevatedButton(
-                                          onPressed: () {},
-                                          child: const Text("Get Status")),
-                                      const SizedBox(width: 10),
-                                      ElevatedButton(
-                                          onPressed: () {},
-                                          child: const Text("Delete")),
-                                    ],
-                                  )
-                                ],
-                              ));
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        ElevatedButton(
+                                            onPressed: () {
+                                              BlocProvider.of<AttachfilesBloc>(
+                                                      context)
+                                                  .add(ChangeAttachFileStatus(
+                                                      state.attachFiles[index]
+                                                          .id,
+                                                      currentStatus));
+                                            },
+                                            child: const Text("Update Status")),
+                                        const SizedBox(width: 10),
+                                        ElevatedButton(
+                                            onPressed: () {
+                                              BlocProvider.of<AttachfilesBloc>(
+                                                      context)
+                                                  .add(DeleteAttachedFile(state
+                                                      .attachFiles[index].id));
+                                            },
+                                            child: const Text("Delete")),
+                                      ],
+                                    )
+                                  ],
+                                ));
+                          });
                         },
                       ),
                     )

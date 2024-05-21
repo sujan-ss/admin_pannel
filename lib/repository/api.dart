@@ -12,4 +12,10 @@ class ApiConstants {
   static const getIncidentsUrl = "${baseUrl}incident/getIncidents";
   static const deleteIncidentsUrl = "${baseUrl}incident/deleteIncident";
   static const changeIncidentStatus = "${baseUrl}incident/changeStatus";
+  static const addPoliceUrl = "${baseUrl}police/addPolice";
+  static const getPoliceUrl = "${baseUrl}police/getPolice";
+  static const assignPolice = "${baseUrl}incident/assignPolice";
+  static const deleteAttachFileUrl = "${baseUrl}attach_files/deleteAttachFile";
+  static const changeAttachFileStatusUrl =
+      "${baseUrl}attach_files/changeStatus";
 }
